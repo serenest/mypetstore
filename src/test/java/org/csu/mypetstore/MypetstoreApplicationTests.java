@@ -1,13 +1,11 @@
 package org.csu.mypetstore;
 
 import net.bytebuddy.build.ToStringPlugin;
-import org.csu.mypetstore.domain.Account;
-import org.csu.mypetstore.domain.Category;
-import org.csu.mypetstore.domain.Item;
-import org.csu.mypetstore.domain.Product;
+import org.csu.mypetstore.domain.*;
 import org.csu.mypetstore.persistence.ItemMapper;
 import org.csu.mypetstore.service.AccountService;
 import org.csu.mypetstore.service.CatalogService;
+import org.csu.mypetstore.service.OrderService;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +13,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+import static sun.misc.Version.println;
+
 @SpringBootTest
 @MapperScan("org.csu.mypetstore.persistence")
 class MypetstoreApplicationTests {
 
     @Autowired
-    CatalogService catalogService;
+    private CatalogService catalogService;
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private OrderService orderService;
+
     @Test
     void contextLoads() {
     }
@@ -96,7 +99,7 @@ class MypetstoreApplicationTests {
         printInfo(account);
 
         Account temp = account;
-        temp.setUsername("xyz");
+        temp.setUsername("xyzaaa");
         temp.setPassword("zyx");
         accountService.insertAccount(temp);
 
@@ -116,4 +119,19 @@ class MypetstoreApplicationTests {
         System.out.println(account.getUsername()+","+account.getPassword());
     }
 
+    @Test
+    void testLineItemMapper(){
+        List<Order> lineItemList = orderService.getOrdersByUsername("123");
+
+    }
+
+    @Test
+    void testOrderMapper(){
+        Order order = orderService.getOrder(1009);
+    }
+
+    @Test
+    void testSequenceMapper(){
+
+    }
 }

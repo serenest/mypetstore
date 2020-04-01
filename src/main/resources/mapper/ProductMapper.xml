@@ -14,7 +14,7 @@
      WHERE PRODUCTID = #{productId}
     </select>
 
-    <select id="getProductListByCategory" parameterType="string" resultType="product">
+    <select id="getProductListByCategory" parameterType="string" resultType="Product">
     SELECT
     PRODUCTID,
     NAME,
